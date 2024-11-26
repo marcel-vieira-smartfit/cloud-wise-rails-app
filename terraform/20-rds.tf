@@ -44,8 +44,8 @@ resource "aws_vpc_security_group_egress_rule" "rds_allow_all_outbound_traffic" {
   ip_protocol = "-1"
 }
 
-resource "aws_vpc_security_group_ingress_rule" "rds_inbound_traffic" {
-  for_each = aws_subnet.isolated
+resource "aws_vpc_security_group_ingress_rule" "rds_inbound_private_traffic" {
+  for_each = aws_subnet.private
 
   security_group_id = aws_security_group.rds_security_group.id
   cidr_ipv4 = each.value.cidr_block
