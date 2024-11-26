@@ -53,24 +53,3 @@ resource "aws_vpc_security_group_ingress_rule" "rds_inbound_private_traffic" {
   to_port = 5432
   ip_protocol = "tcp"
 }
-
-# Outputs
-output "database_address" {
-  description = "Database address"
-  value       = aws_db_instance.default.address
-}
-
-output "database_endpoint" {
-  description = "Database endpoint"
-  value       = aws_db_instance.default.endpoint
-}
-
-output "database_port" {
-  description = "Database port"
-  value       = aws_db_instance.default.port
-}
-
-output "database_ip" {
-  description = "Database port"
-  value       = aws_db_instance.default.domain_dns_ips
-}

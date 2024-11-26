@@ -27,10 +27,6 @@ resource "aws_ecs_task_definition" "web" {
           "value": var.database_username
         },
         {
-          "name": "SECRET_KEY_BASE",
-          "value": "f0320bc38752882ef983abd3b521de18"
-        },
-        {
           "name": "RAILS_SERVE_STATIC_FILES",
           "value": "true"
         },
@@ -48,6 +44,10 @@ resource "aws_ecs_task_definition" "web" {
         {
           "name": "POSTGRES_PASSWORD",
           "valueFrom": module.secrets_manager.secret_arn
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "valueFrom": module.ecs_secrets_manager.secret_arn
         }
       ]
     }
@@ -62,10 +62,6 @@ resource "aws_ecs_task_definition" "web" {
   execution_role_arn = aws_iam_role.ecs_execution_role.arn
 
   task_role_arn = aws_iam_role.ecs_task_role.arn
-}
-
-data "aws_ecs_task_definition" "web_app" {
-  task_definition = aws_ecs_task_definition.web.family
 }
 
 resource "aws_security_group" "ecs_web" {

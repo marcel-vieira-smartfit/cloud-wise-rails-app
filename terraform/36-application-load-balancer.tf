@@ -82,8 +82,3 @@ resource "aws_security_group_rule" "alb_egress" {
     security_group_id           = aws_security_group.alb_sg.id
     cidr_blocks                 = ["0.0.0.0/0"] 
 }
-
-output "load_balancer" {
-  description = "load balancer info"
-  value = aws_alb.application_load_balancer.dns_name
-}

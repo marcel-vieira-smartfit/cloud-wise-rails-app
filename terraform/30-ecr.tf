@@ -29,10 +29,3 @@ resource "aws_ecr_lifecycle_policy" "example" {
 }
 EOF
 }
-
-data "aws_ecr_image" "image" {
-  depends_on = [ aws_ecr_repository.ecr ]
-
-  repository_name = aws_ecr_repository.ecr.name
-  most_recent = true
-}
