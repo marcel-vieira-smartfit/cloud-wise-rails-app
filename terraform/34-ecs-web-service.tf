@@ -2,7 +2,7 @@ resource "aws_ecs_service" "web" {
   cluster = aws_ecs_cluster.cluster.id
   name = "web"
   task_definition = "${aws_ecs_task_definition.web.family}:${max("${aws_ecs_task_definition.web.revision}", "${data.aws_ecs_task_definition.web_app.revision}")}"
-  desired_count = 1
+  desired_count = 2
   launch_type = "FARGATE"
 
   enable_execute_command =  true
